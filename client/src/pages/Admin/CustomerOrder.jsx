@@ -17,7 +17,7 @@ const CustomerOrder = () => {
   const getAllOrders = async () => {
     const {
       data: { data },
-    } = await axios.get("http://localhost:8080/api/v1/orders");
+    } = await axios.get("https://p4-node-app-api.vercel.app/api/v1/orders");
     localStorage.setItem("orders", JSON.stringify(data));
     setOrders(data);
   };
@@ -25,7 +25,7 @@ const CustomerOrder = () => {
   const deleteOrder = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/v1/orders/delete/${id}`
+        `https://p4-node-app-api.vercel.app/api/v1/orders/delete/${id}`
       );
       // console.log(response);
       deleteOrderByID(id);

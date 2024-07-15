@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_APP_API}/api/v1/auth/login`,
+        `https://p4-node-app-api.vercel.app/api/v1/auth/login`,
         { email, password }
       );
       console.log(res);

@@ -52,7 +52,7 @@ const CreateOrder = () => {
     data.append("order-image", image);
 
     const newOrder = await axios.post(
-      "http://localhost:8080/api/v1/orders",
+      "https://p4-node-app-api.vercel.app/api/v1/orders",
       data,
       {
         headers: {
