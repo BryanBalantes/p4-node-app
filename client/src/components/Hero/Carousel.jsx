@@ -1,0 +1,80 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
+
+import { useEffect, useState } from "react";
+import "../../styles/Carousel.css";
+
+const Carousel = ({ images }) => {
+  const [current, setCurrent] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(true);
+  let timeOut = null;
+
+  useEffect(() => {
+    timeOut =
+      autoPlay &&
+      setTimeout(() => {
+        slideright();
+      }, 2000);
+  });
+
+  const slideright = () => {
+    setCurrent(current === images.length - 1 ? 0 : current + 1);
+  };
+
+  const slideleft = () => {
+    setCurrent(current === 0 ? images.length - 1 : current - 1);
+  };
+  return (
+    <div
+      className="carousel"
+      onMouseEnter={() => {
+        setAutoPlay(false);
+        clearTimeout(timeOut);
+      }}
+      onMouseLeave={() => {
+        setAutoPlay(true);
+      }}
+    >
+      <div className="carousel_wrapper">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={
+              index === current
+                ? "carousel_card carousel_card-active"
+                : "carousel_card"
+            }
+          >
+            <img className="card_image" src={image.image} alt="" />
+            <div className="card_overlay">
+              <h2 className="card_title"></h2>
+            </div>
+          </div>
+        ))}
+        <div className="carousel_arrow_left" onClick={slideleft}>
+          &lsaquo;
+        </div>
+        <div className="carousel_arrow_right" onClick={slideright}>
+          &rsaquo;
+        </div>
+        <div className="carousel_pagination">
+          {images.map((_, index) => {
+            return (
+              <div
+                key={index}
+                className={
+                  index === current
+                    ? "pagination_dot pagination_dot-active"
+                    : "pagination_dot"
+                }
+                onClick={() => setCurrent(index)}
+              ></div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Carousel;
